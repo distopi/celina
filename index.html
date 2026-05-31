@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Um Desafio de Amor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container-quiz">
+
+        <div id="tela-inicial" class="card-quiz">
+            <h2>Um Pequeno Desafio... ❤️</h2>
+            <p>Eu planejei algo muito especial para esse Dia dos Namorados, mas para você chegar até lá, vai ter que provar que me conhece de verdade!</p>
+            <button class="btn-quiz" onclick="iniciarQuiz()">Estou pronta!</button>
+        </div>
+
+        <div id="tela-pergunta" class="card-quiz escondido">
+            <h2 id="numero-pergunta">Pergunta 1</h2>
+            <p id="texto-pergunta">Texto da pergunta aqui?</p>
+            <div class="opcoes-container" id="opcoes-container"></div>
+        </div>
+
+        <div id="tela-erro" class="card-quiz escondido">
+            <h2>Xii, errou! 😜</h2>
+            <p>Achei que você me conhecia melhor do que isso... Para liberar o seu presente, você vai ter que começar de novo e acertar tudo!</p>
+            <button class="btn-quiz" onclick="reiniciarQuiz()">Tentar Novamente</button>
+        </div>
+
+    </div>
+
+    <script>
+        const perguntas = [
+            {
+                pergunta: "Se eu pudesse ter os poderes de qualquer herói por um dia, qual seria o meu favorito?",
+                opcoes: [
+                    { texto: "Dex-starr", img: "img/dex-star.jpg" },
+                    { texto: "Ravena", img: "img/ravena.webp" },
+                    { texto: "Punchline", img: "img/punchline.webp" },
+                    { texto: "Flash", img: "img/flash.jpg" }
+                ],
+                correta: 0
+            },
+            {
+                pergunta: "Qual dessas cartas de Yu-Gi-Oh! tem o design mais incrível na minha opinião?",
+                opcoes: [
+                    { texto: "Deus Machinex", img: "img/machinex.jpg" },
+                    { texto: "Fúria D/D/D", img: "img/rage.jpg" },
+                    { texto: "Herói Contraste", img: "img/contraste.jpg" },
+                    { texto: "Lady da Fortuna Every", img: "img/every.png" }
+                ],
+                correta: 1
+            },
+            {
+                pergunta: "Qual é a minha carta favorita de Yu-Gi-Oh!?",
+                opcoes: [
+                    { texto: "Pote da Ganância", img: "img/pot.png" },
+                    { texto: "Timegazer Magician", img: "img/timegazer.png" },
+                    { texto: "Chaos Command Magician", img: "img/magician.jpg" },
+                    { texto: "Kuriboh Lvl 10", img: "img/kuriboh.jpg" }
+                ],
+                correta: 2
+            },
+            {
+                pergunta: "Qual é o meu herói favorito?",
+                opcoes: [
+                    { texto: "Booster Gold", img: "img/booster.webp" },
+                    { texto: "Tornado Vermelho", img: "img/tornado.webp" },
+                    { texto: "Questão", img: "img/Question.webp" },
+                    { texto: "Besouro Azul", img: "img/beetle.png" }
+                ],
+                correta: 0
+            },
+            {
+                pergunta: "Qual é o meu personagem favorito de Digital Circus?",
+                opcoes: [
+                    { texto: "Pomni", img: "img/pomni.jpg" },
+                    { texto: "Jax", img: "img/jax.jpg" },
+                    { texto: "Caine", img: "img/caine.webp" },
+                    { texto: "Kinger", img: "img/kinger.jpg" }
+                ],
+                correta: 2
+            },
+            {
+                pergunta: "Qual é a minha classe de RPG?",
+                opcoes: [
+                    { texto: "Guerreiro", img: "img/fighter.jpg" },
+                    { texto: "Mago", img: "img/wizard.png" },
+                    { texto: "Ladino", img: "img/rogue.jpg" },
+                    { texto: "Bruxo", img: "img/warlock.png" }
+                ],
+                correta: 3
+            },
+            {
+                pergunta: "Se eu tivesse que participar de uma guerra de Fate, qual eu escolheria pra ser o meu servo?",
+                opcoes: [
+                    { texto: "Karna", img: "img/karna.webp" },
+                    { texto: "Alcides", img: "img/alcides.webp" },
+                    { texto: "Gilgamesh", img: "img/gilgamesh.webp" },
+                    { texto: "Astolfo", img: "img/astolfo.webp" }
+                ],
+                correta: 0
+            },
+            {
+                pergunta: "Qual é o meu anime favorito?",
+                opcoes: [
+                    { texto: "My Little Monster", img: "img/monster.jpg" },
+                    { texto: "Fate", img: "img/fate.jpg" },
+                    { texto: "Code Geass", img: "img/code.jpg" },
+                    { texto: "One Piece", img: "img/piece.jpg" }
+                ],
+                correta: 0
+            },
+            {
+                pergunta: "Qual é o meu Pokémon favorito?",
+                opcoes: [
+                    { texto: "Pixacu", img: "img/pikachu.png" },
+                    { texto: "Hatterene", img: "img/hatterene.png" },
+                    { texto: "Tinkaton", img: "img/tinkaton.png" },
+                    { texto: "Armorouge", img: "img/armorouge.png" }
+                ],
+                correta: 2
+            },
+            {
+                pergunta: "Qual é o meu estilo de música?",
+                opcoes: [
+                    { texto: "Rock", img: "img/rock.avif" },
+                    { texto: "Pop", img: "img/pop.png" },
+                    { texto: "Punk", img: "img/punk.jpg" },
+                    { texto: "Eletrônica", img: "img/eletronica.jpg" }
+                ],
+                correta: 2
+            }
+        ];
+
+        let perguntaAtual = 0;
+
+        function iniciarQuiz() {
+            document.getElementById("tela-inicial").classList.add("escondido");
+            document.getElementById("tela-pergunta").classList.remove("escondido");
+            mostrarPergunta();
+        }
+
+        function mostrarPergunta() {
+            const dadosPergunta = perguntas[perguntaAtual];
+            document.getElementById("numero-pergunta").innerText = `Pergunta ${perguntaAtual + 1} de ${perguntas.length}`;
+            document.getElementById("texto-pergunta").innerText = dadosPergunta.pergunta;
+
+            const containerOpcoes = document.getElementById("opcoes-container");
+            containerOpcoes.innerHTML = "";
+
+            dadosPergunta.opcoes.forEach((opcao, index) => {
+                const botao = document.createElement("button");
+                botao.classList.add("btn-quiz");
+
+                if (opcao.img) {
+                    const imagem = document.createElement("img");
+                    imagem.src = opcao.img;
+                    imagem.classList.add("img-opcao");
+                    botao.appendChild(imagem);
+                }
+
+                const textoSpan = document.createElement("span");
+                textoSpan.innerText = opcao.texto;
+                botao.appendChild(textoSpan);
+
+                botao.onclick = () => verificarResposta(index);
+                containerOpcoes.appendChild(botao);
+            });
+        }
+
+        function verificarResposta(indiceSelecionado) {
+            if (indiceSelecionado === perguntas[perguntaAtual].correta) {
+                perguntaAtual++;
+                if (perguntaAtual < perguntas.length) {
+                    mostrarPergunta();
+                } else {
+                    window.location.href = "principal.html";
+                }
+            } else {
+                document.getElementById("tela-pergunta").classList.add("escondido");
+                document.getElementById("tela-erro").classList.remove("escondido");
+            }
+        }
+
+        function reiniciarQuiz() {
+            perguntaAtual = 0;
+            document.getElementById("tela-erro").classList.add("escondido");
+            document.getElementById("tela-pergunta").classList.remove("escondido");
+            mostrarPergunta();
+        }
+    </script>
+
+</body>
+</html>

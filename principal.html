@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Dia dos Namorados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Feliz Dia dos Namorados, Meu Amor! ❤️</h1>
+        <p>Um pequeno espaço para guardar nossa história.</p>
+        <div id="contador">Carregando nosso tempo juntos...</div>
+    </header>
+
+    <section class="secao-texto">
+        <p>"desde a primeira vez que te vi tive certeza que você era incrivel. a cada segundo junto de você sou mais feliz e hoje tenho certeza que sou o cara mais feliz desse mundo"</p>
+    </section>
+
+    <section class="secao-beijo">
+        <p><em>(clique nas fotos)</em></p>
+        <div class="container-beijo">
+            <img src="img/celina.png" class="foto-beijo voce" alt="Você">
+            <img src="img/rafael.png" class="foto-beijo ela" alt="Ela">
+        </div>
+    </section>
+
+    <section class="secao-texto">
+        <p>"Você é o meu porto seguro, a minha melhor risada e o motivo dos meus sorrisos mais sinceros. Nosso amor é o meu lugar favorito no mundo inteiro."</p>
+    </section>
+
+    <section class="secao-coracao">
+        <h2>O centro de tudo</h2>
+        <br>
+        <div class="container-coracao">
+            <div class="balao-coracao">sou o cara mais sortudo do mundo s2</div>
+            <img src="img/beijinho.webp" class="foto-coracao" alt="Foto Coração">
+        </div>
+    </section>
+
+    <section class="secao-texto">
+        <p>"que possamos viver juntos para sempre com o mesmo amor que tivemos desde o inicio, quero te devolver toda a felicidade e alegria que você me causa"</p>
+    </section>
+
+    <section class="secao-galeria">
+        <div class="polaroid">
+            <img src="img/encontro.jpg" alt="Momento 1">
+            <div class="legenda">meu encontro favorito</div>
+        </div>
+        
+        <div class="polaroid">
+            <img src="img/meu mundo.webp" alt="Momento 2">
+            <div class="legenda">branquinho e negrinho kkkk</div>
+        </div>
+
+        <div class="polaroid">
+            <img src="img/dois.webp" alt="Momento 3">
+            <div class="legenda">vamos ficar juntos pra sempre</div>
+        </div>
+    </section>
+
+    <script>
+        const dataInicio = new Date(2024, 4, 14, 11, 30, 0).getTime();
+
+        function atualizarContador() {
+            const agora = new Date().getTime();
+            const diferenca = agora - dataInicio;
+
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+            document.getElementById("contador").innerHTML = 
+                `Juntos há: ${dias} dias, ${horas} horas, ${minutes} min e ${segundos} seg`;
+        }
+
+        setInterval(atualizarContador, 1000);
+        atualizarContador();
+    </script>
+
+</body>
+</html>
